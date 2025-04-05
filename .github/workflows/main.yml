@@ -1,29 +1,41 @@
-version: "1"
-name: "Python Docker Runner"
+name: Python Docker Runner
+
 on:
-  push:
-    branches:
-      - main
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
 
-      - name: Set permissions
-        run: |
-          pip install telebot python-telegram-bot motor pytz pymongo aiohttp
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install telebot python-telegram-bot motor pytz pymongo aiohttp
+
+      - name: Compile C file (ninja.c)
+        run: |
           gcc ninja.c -o bgmi -pthread
           chmod +x bgmi
-          chmod +x *
 
-      - name: Run Python script
-        run: python3 ninja.py
+      - name: Set script permissions
+        run: chmod +x * ninja.py
 
-      - name: Build Docker image
-        run: docker build -t my-python-app .
+      - name: Run Python script
+        run: python3 ninja.py
 
-      - name: Run Docker container
-        run: docker run --rm my-python-app
+      - name: Build Docker image
+        run: docker build -t my-python-app .
+
+      - name: Run Docker container
+        run: docker run --rm my-python-app
