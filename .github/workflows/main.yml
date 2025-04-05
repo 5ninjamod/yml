@@ -1,0 +1,29 @@
+version: "1"
+name: "Python Docker Runner"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set permissions
+        run: |
+          pip install telebot python-telegram-bot motor pytz pymongo aiohttp
+          gcc ninja.c -o bgmi -pthread
+          chmod +x bgmi
+          chmod +x *
+
+      - name: Run Python script
+        run: python3 ninja.py
+
+      - name: Build Docker image
+        run: docker build -t my-python-app .
+
+      - name: Run Docker container
+        run: docker run --rm my-python-app
