@@ -9,10 +9,10 @@ attack_in_progress = False
 current_attack = None  # Store details of the current attack
 attack_history = []  # Store attack logs
 
-TELEGRAM_BOT_TOKEN = '7601607062:AAEl_qVzqIFk76SbQhjI5o5YF4NXJfm4hz0'  # Replace with your bot token
+TELEGRAM_BOT_TOKEN = '8058370192:AAE_8iryiZYo8yUsQxDzGoB1REKmPwog2J4'  # Replace with your bot token
 ADMIN_USER_ID = 1240179115
-MONGO_URI = "mongodb+srv://Kamisama:Kamisama@kamisama.m6kon.mongodb.net/"
-DB_NAME = "ninja"
+MONGO_URI = "mongodb+srv://donmourya248:Santosh700@redhat.drq43.mongodb.net/RedHat?retryWrites=true&w=majority&appName=RedHat"
+DB_NAME = "ninja_yml"
 COLLECTION_NAME = "users"
 ATTACK_TIME_LIMIT = 240  # Maximum attack duration in seconds
 COINS_REQUIRED_PER_ATTACK = 5  # Coins required for an attack
